@@ -39,8 +39,8 @@ public class bulletBrain : Node
     public void spawnExplosion(Vector2 spawnPosition, string animationName)
     {
         // Spawn explosion at position
-        var explosion = (explosion)scenes._sceneExplosion.Instance();
-        GetNode("/root/game/explosions").AddChild(explosion);
+        var explosion = (Area2D)scenes._sceneExplosion.Instance();
+        GetNode("/root/game/bullets").AddChild(explosion);
         explosion.GlobalPosition = spawnPosition;
 
         // Set the explosion animation
