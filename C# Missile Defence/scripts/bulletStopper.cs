@@ -19,12 +19,7 @@ public class bulletStopper : Area2D
             bulletBrain.spawnExplosion(GlobalPosition, "player");
 
             bullet.QueueFree();
+            QueueFree(); // destroys bulletStopper
         }
     }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
 }
