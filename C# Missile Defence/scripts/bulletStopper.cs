@@ -4,11 +4,13 @@ using System;
 public class bulletStopper : Area2D
 {
     bulletBrain bulletBrain;
+    player player;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         bulletBrain = (bulletBrain)GetNode("/root/game/bullets/bulletBrain");
+        player = (player)GetNode("/root/game/player");
     }
 
     public void _on_bulletStopper_area_entered(Area2D bullet)
@@ -20,6 +22,8 @@ public class bulletStopper : Area2D
 
             bullet.QueueFree();
             QueueFree(); // destroys bulletStopper
+
+            player.canShoot = true;
         }
     }
 }
