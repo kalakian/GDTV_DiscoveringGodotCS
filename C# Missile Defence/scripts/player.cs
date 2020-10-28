@@ -10,6 +10,13 @@ public class player : Node
     public override void _Ready()
     {
         bulletBrain = (bulletBrain)GetNode("/root/game/bullets/bulletBrain");
+        updateUI();
+    }
+
+    public void updateUI()
+    {
+        var healthAndScore = (Label)GetNode("/root/game/hud/healthAndScore");
+        healthAndScore.Text = "Hey, this works!!";
     }
 
     public void _on_playerHitZone_area_entered(Area2D bullet)
