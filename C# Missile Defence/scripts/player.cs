@@ -50,6 +50,7 @@ public class player : Node
     {
         score += scoreAmount;
         updateUI();
+        bulletBrain.increaseDifficulty();
     }
 
     public void updateUI()
