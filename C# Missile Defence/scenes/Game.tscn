@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/tileMapStars.png" type="Texture" id=1]
 [ext_resource path="res://assets/tileMapGround.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scripts/bulletBrain.cs" type="Script" id=4]
 [ext_resource path="res://scripts/player.cs" type="Script" id=5]
 [ext_resource path="res://assets/kenvector_future.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/gameOverOverlay.png" type="Texture" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tileMapStars.png 0"
@@ -39,11 +40,15 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 44
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="DynamicFont" id=5]
+size = 90
+font_data = ExtResource( 6 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 513.534, 72.5756 )
 
 [node name="game" type="Node2D"]
@@ -81,10 +86,30 @@ position = Vector2( 510.414, 437.246 )
 [node name="healthAndScore" type="Label" parent="hud"]
 margin_right = 1021.0
 margin_bottom = 123.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "Hello World!"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gameOverScreen" type="Node2D" parent="hud"]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="hud/gameOverScreen"]
+position = Vector2( 513.246, 303.009 )
+scale = Vector2( 8.46443, 5.07927 )
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="hud/gameOverScreen"]
+margin_left = 1.33484
+margin_top = 133.484
+margin_right = 1022.33
+margin_bottom = 296.484
+custom_fonts/font = SubResource( 5 )
+text = "Game Over"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -96,6 +121,6 @@ script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitZone"]
 position = Vector2( 514.466, 546.576 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 [connection signal="timeout" from="bullets/bulletBrain/enemySpawner" to="bullets/bulletBrain" method="_on_enemySpawner_timeout"]
 [connection signal="area_entered" from="player/playerHitZone" to="player" method="_on_playerHitZone_area_entered"]
