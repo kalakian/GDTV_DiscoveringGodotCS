@@ -5,10 +5,12 @@ public class bulletBrain : Node
 {
     scenes scenes = new scenes();
     Timer enemySpawner;
-    public float maxSpawnInterval = 4;
-    public float minSpawnInterval = 0.5f;
-    public float spawnIntervalDecrease = 0.2f;
+    [Export] public float maxSpawnInterval = 4;
+    [Export] public float minSpawnInterval = 0.5f;
+    [Export] public float spawnIntervalDecrease = 0.2f;
     public float spawnInterval = 0;
+    [Export] public int playerBulletSpeed = 300;
+    [Export] public int enemyBulletSpeed = 250;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -50,6 +52,15 @@ public class bulletBrain : Node
         // Set the bullet animation
         var bulletSprite = (AnimatedSprite)bullet.GetNode("AnimatedSprite");
         bulletSprite.Play(animationName);
+
+        if (animationName == "player")
+        {
+            bullet.speed = playerBulletSpeed;
+        }
+        else
+        {
+            bullet.speed = enemyBulletSpeed;
+        }
     }
 
     public void spawnExplosion(Vector2 spawnPosition, string animationName)
@@ -63,10 +74,4 @@ public class bulletBrain : Node
         var explosionSprite = (AnimatedSprite)explosion.GetNode("AnimatedSprite");
         explosionSprite.Play(animationName);
     }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
 }
